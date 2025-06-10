@@ -1,0 +1,9 @@
+*
+!*.*
+!*/
+*.pdf
+unsolved/
+currentproblem/*.txt
+currentproblem/*.cpp
+cftestcases/
+*gch
