@@ -41,54 +41,31 @@ typedef complex<ll> P;
 // Constants
 const lld pi = 3.1415926535;
 const ll inf = 1e17;
+ll n;                    // number of vertices
+vector<ll> adj[1000005]; // adjacency list of graph
+vector<bool> visited;
+vector<ll> ans;
 
-// Time complexity for find set is O(logn) average
-// Time complexity for complete operation of union find average O(n*alpha(n))
-// alpha is ackerman function
-ll parent[1000005];
-ll siz[1000005];
-ll rnk[1000005];
-
-ll find_set(ll v) {
-  if (v == parent[v])
-    return v;
-  return parent[v] = find_set(parent[v]);
-}
-// Set union by size
-void make_set(ll v) {
-  parent[v] = v;
-  siz[v] = 1;
-}
-
-void union_sets(ll a, ll b) {
-  a = find_set(a);
-  b = find_set(b);
-  if (a != b) {
-    if (siz[a] < siz[b])
-      swap(a, b);
-    parent[b] = a;
-    siz[a] += siz[b];
+void dfs(ll v) {
+  visited[v] = true;
+  for (ll u : adj[v]) {
+    if (!visited[u]) {
+      dfs(u);
+    }
   }
+  ans.push_back(v);
 }
 
-// Set union by rank
-void make_set(ll v) {
-  parent[v] = v;
-  rnk[v] = 0;
-}
-
-void union_sets(ll a, ll b) {
-  a = find_set(a);
-  b = find_set(b);
-  if (a != b) {
-    if (rnk[a] < rnk[b])
-      swap(a, b);
-    parent[b] = a;
-    if (rnk[a] == rnk[b])
-      rnk[a]++;
+void topological_sort() {
+  visited.assign(n, false);
+  ans.clear();
+  for (ll i = 0; i < n; ++i) {
+    if (!visited[i]) {
+      dfs(i);
+    }
   }
+  reverse(ans.begin(), ans.end());
 }
-
 void solve() {}
 
 int main() {

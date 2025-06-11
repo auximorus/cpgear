@@ -50,8 +50,8 @@ void dfs(ll v) {
 
 // Better implementation
 
-vector<vector<ll>> adj; // graph represented as an adjacency list
-ll n;                   // number of vertices
+vector<ll> adj[1000005]; // graph represented as an adjacency list
+ll n;                    // number of vertices
 
 vector<ll> color;
 
