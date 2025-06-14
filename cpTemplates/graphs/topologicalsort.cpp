@@ -66,6 +66,41 @@ void topological_sort() {
   }
   reverse(ans.begin(), ans.end());
 }
+
+// using bfs
+
+vector<ll> adj[100005];
+ll indegree[100005];
+void topsort() {
+  ll n, m;
+  n = 100005;
+  vector<ll> sortedarr;
+  memset(indegree, 0, n);
+
+  queue<ll> q;
+  ll cnt = 0;
+  for (ll i = 0; i < n; i++) {
+    if (indegree[i] == 0) {
+      q.push(i);
+    }
+  }
+  while (!q.empty()) {
+    ++cnt;
+    ll x = q.front();
+    q.pop();
+    sortedarr.pb(x);
+    for (ll u : adj[x]) {
+      --indegree[u];
+      if (indegree[u] == 0) {
+        q.push(u);
+      }
+    }
+  }
+  if (cnt < n) {
+    cout << "Graph is cyclic";
+  }
+}
+
 void solve() {}
 
 int main() {
