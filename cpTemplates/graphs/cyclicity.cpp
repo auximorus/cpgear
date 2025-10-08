@@ -49,12 +49,12 @@ vector<char> color;
 vector<ll> parent;
 ll cycle_start, cycle_end;
 
-bool cycledfs(ll v) {
+bool dfs(ll v) {
   color[v] = 1;
   for (ll u : adj[v]) {
     if (color[u] == 0) {
       parent[u] = v;
-      if (cycledfs(u))
+      if (dfs(u))
         return true;
     } else if (color[u] == 1) {
       cycle_end = v;
@@ -72,7 +72,7 @@ void find_cycle() {
   cycle_start = -1;
 
   for (ll v = 0; v < n; v++) {
-    if (color[v] == 0 && cycledfs(v))
+    if (color[v] == 0 && dfs(v))
       break;
   }
 
