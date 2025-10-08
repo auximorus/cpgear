@@ -37,7 +37,8 @@ int C(int n, int k) {
     res = res * (n - k + i) / i;
   return (int)(res + 0.01);
 }
-// function to find the factorial of a number(change mod accordingly)
+// function to find the factorial of a number(change mod accordingly),
+// factorial%mod
 ll factorial(ll n) {
   ll result = 1;
   ll const mod = 1e17;
