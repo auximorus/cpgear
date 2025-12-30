@@ -46,10 +46,15 @@ struct TreeNode {
   int val;
   TreeNode *right;
   TreeNode *left;
-  TreeNode(int value = -1) { val = value; }
+  TreeNode(int value = -1) {
+    val = value;
+    right = left = NULL;
+  }
 };
 
 // Order of traversal - Root Left Right
+
+// recursive approach
 void preorder(TreeNode *node) {
   if (node == NULL) {
     return;
@@ -59,6 +64,25 @@ void preorder(TreeNode *node) {
   preorder(node->right);
 }
 
+// iterative approach
+void traverse(TreeNode *root) {
+  if (root == NULL) {
+    return;
+  }
+  stack<TreeNode *> st;
+  st.push(root);
+  while (!st.empty()) {
+    root = st.top();
+    st.pop();
+    cout << root->val; // process root
+    if (root->right) {
+      st.push(root->right);
+    }
+    if (root->left) {
+      st.push(root->left);
+    }
+  }
+}
 void solve() {}
 
 int main() {

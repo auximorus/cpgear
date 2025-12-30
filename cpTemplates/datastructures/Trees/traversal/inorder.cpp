@@ -46,7 +46,10 @@ struct TreeNode {
   int val;
   TreeNode *right;
   TreeNode *left;
-  TreeNode(int value = -1) { val = value; }
+  TreeNode(int value = -1) {
+    val = value;
+    right = left = NULL;
+  }
 };
 // traversal order- left root right
 void inorder(TreeNode *node) {
@@ -55,6 +58,22 @@ void inorder(TreeNode *node) {
   inorder(node->left);
   cout << node->val;
   inorder(node->right);
+}
+// iterative approach
+void traverse(TreeNode *root) {
+  stack<TreeNode *> st;
+  TreeNode *node = root;
+  while (node != NULL || !st.empty()) {
+    if (node) {
+      st.push(node);
+      node = node->left;
+    } else {
+      node = st.top();
+      st.pop();
+      cout << node->val; // process node
+      node = node->right;
+    }
+  }
 }
 
 void solve() {}

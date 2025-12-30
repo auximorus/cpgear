@@ -47,7 +47,10 @@ struct TreeNode {
   int val;
   TreeNode *right;
   TreeNode *left;
-  TreeNode(int value = -1) { val = value; }
+  TreeNode(int value = -1) {
+    val = value;
+    right = left = NULL;
+  }
 };
 // traversal order- left right root
 void postorder(TreeNode *node) {
@@ -58,6 +61,55 @@ void postorder(TreeNode *node) {
   cout << node->val;
 }
 
+// using set
+
+void traversal(TreeNode *root) {
+  if (!root)
+    return;
+
+  stack<TreeNode *> st;
+  set<TreeNode *> visited;
+
+  st.push(root);
+
+  while (!st.empty()) {
+    TreeNode *node = st.top();
+
+    if (node->left && visited.find(node->left) == visited.end()) {
+      st.push(node->left);
+    } else if (node->right && visited.find(node->right) == visited.end()) {
+      st.push(node->right);
+    } else {
+      cout << node->val << " "; // process node
+      visited.insert(node);
+      st.pop();
+    }
+  }
+}
+
+// no set
+
+void traversalnoset(TreeNode *root) {
+  stack<TreeNode *> st;
+  TreeNode *node = root;
+  TreeNode *lastVisited = NULL;
+
+  while (node || !st.empty()) {
+    if (node) {
+      st.push(node);
+      node = node->left;
+    } else {
+      TreeNode *top = st.top();
+      if (top->right && lastVisited != top->right) {
+        node = top->right;
+      } else {
+        cout << top->val << " "; // process node
+        lastVisited = top;
+        st.pop();
+      }
+    }
+  }
+}
 void solve() {}
 
 int main() {
