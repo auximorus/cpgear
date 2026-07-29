@@ -6,4 +6,5 @@ unsolved/
 currentproblem/*.txt
 currentproblem/*.cpp
 cftestcases/
+test.txt
 *gch

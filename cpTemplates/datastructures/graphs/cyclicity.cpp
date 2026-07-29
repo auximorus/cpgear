@@ -45,7 +45,7 @@ const ll inf = 1e17;
 // implementation for directed graph
 ll n;
 vector<ll> adj[1000005];
-vector<char> color;
+vector<ll> color;
 vector<ll> parent;
 ll cycle_start, cycle_end;
 
